@@ -1,0 +1,301 @@
+[2m10:28:11 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:28:11 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:28:11 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m10:28:11 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m10:30:14 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:30:14 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:30:14 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m10:30:14 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m10:32:15 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:32:15 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:32:15 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m10:32:15 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m10:46:09 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:46:09 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:46:09 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m10:46:09 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m10:47:12 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:47:12 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m10:47:12 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m10:47:12 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m11:56:23 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m11:56:23 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m11:56:23 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m11:56:23 am[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m12:06:29 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:06:29 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:06:29 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m12:06:29 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m12:08:50 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:08:50 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:08:50 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m12:08:50 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m12:20:49 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:20:49 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:26:35 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Script error.
+[39m > ../../../@vite/client:516:55
+
+[2m12:26:59 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Script error.
+[39m > ../../../@vite/client:516:55
+
+[2m12:27:57 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Script error.
+[39m > ../../../@vite/client:516:55
+
+[2m12:29:12 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Script error.
+[39m > ../../../@vite/client:516:55
+
+[2m12:29:18 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Script error.
+[39m > ../../../@vite/client:516:55
+
+[2m12:29:29 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Script error.
+[39m > ../../../@vite/client:516:55
+
+[2m12:35:14 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mError[22m: Script error.
+[39m > ../../../@vite/client:516:55
+
+[2m12:36:32 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of undefined (reading 'keyId')
+[39m > script.onload src/pages/TripDetailPage.jsx:54:21
+    52 |        script.onload = () => {
+    53 |          const rzp = new window.Razorpay({
+    54 |            key: order.keyId,
+       |                       ^
+    55 |            amount: order.amount * 100,
+    56 |            currency: order.currency,
+
+[2m12:36:38 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: Cannot read properties of undefined (reading 'keyId')
+[39m > script.onload src/pages/TripDetailPage.jsx:54:21
+    52 |        script.onload = () => {
+    53 |          const rzp = new window.Razorpay({
+    54 |            key: order.keyId,
+       |                       ^
+    55 |            amount: order.amount * 100,
+    56 |            currency: order.currency,
+
+[2m12:36:57 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:36:57 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:36:57 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m12:36:57 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m12:47:01 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:47:01 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m12:47:01 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m12:47:01 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+[2m1:07:23 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m1:07:23 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mWarning: Encountered two children with the same key, `#`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at footer
+    at Footer
+    at Router (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:3723:18)
+    at BrowserRouter (http://127.0.0.1:5174/node_modules/.vite/deps/react-router-dom.js?v=b72ac2d8:4402:8)
+    at App
+[2m1:07:23 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+[2m1:07:23 pm[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22m⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
