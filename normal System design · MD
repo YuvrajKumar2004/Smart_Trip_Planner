@@ -1,0 +1,446 @@
+# 🏛️ TripPlanner — System Design
+
+## Table of Contents
+1. [Architecture Overview](#architecture-overview)
+2. [High-Level Design](#high-level-design)
+3. [Database Schema (ERD)](#database-schema)
+4. [Component Design](#component-design)
+5. [Authentication Flow](#authentication-flow)
+6. [Payment Flow](#payment-flow)
+7. [Expense Split Algorithm](#expense-split-algorithm)
+8. [Deployment Architecture](#deployment-architecture)
+9. [Security Design](#security-design)
+10. [API Design Principles](#api-design-principles)
+
+---
+
+## Architecture Overview
+
+TripPlanner follows a **3-tier architecture** with a clear separation between the presentation layer (React SPA), business logic layer (Spring Boot REST API), and data layer (MySQL on Azure).
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    CLIENT LAYER                         │
+│   React SPA (Vercel CDN)  ←→  Browser                  │
+└─────────────────────┬───────────────────────────────────┘
+                      │ HTTPS REST API
+┌─────────────────────▼───────────────────────────────────┐
+│                  APPLICATION LAYER                      │
+│   Spring Boot (Docker)  →  Azure App Service            │
+│   Spring Security  │  JWT Auth  │  OAuth2 (Google)      │
+│   REST Controllers  │  Service Layer  │  Razorpay SDK   │
+└─────────────────────┬───────────────────────────────────┘
+                      │ JDBC / JPA
+┌─────────────────────▼───────────────────────────────────┐
+│                     DATA LAYER                          │
+│   Azure Database for MySQL Flexible Server (8.0)        │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## High-Level Design
+
+```
+                    ┌─────────────────────┐
+                    │     Vercel CDN       │
+                    │   React Frontend     │
+                    │  (Static Build)      │
+                    └──────────┬──────────┘
+                               │ REST API Calls (HTTPS)
+                               │ Authorization: Bearer <JWT>
+                    ┌──────────▼──────────┐
+                    │   Azure App Service  │
+                    │  ┌───────────────┐  │
+                    │  │ Spring Boot   │  │
+                    │  │   Docker      │  │
+                    │  │  Container    │  │
+                    │  └──────┬────────┘  │
+                    └─────────┼───────────┘
+              ┌───────────────┼───────────────┐
+              │               │               │
+    ┌─────────▼──────┐  ┌─────▼─────┐  ┌────▼──────────┐
+    │  Azure MySQL   │  │ Razorpay  │  │ Google OAuth2 │
+    │ Flexible Server│  │   API     │  │    Server     │
+    └────────────────┘  └───────────┘  └───────────────┘
+```
+
+---
+
+## Database Schema
+
+### Entity Relationship Diagram
+
+```
+┌─────────────────────┐       ┌──────────────────────────┐
+│        users        │       │         trips            │
+├─────────────────────┤       ├──────────────────────────┤
+│ id (PK)             │       │ id (PK)                  │
+│ name                │       │ title                    │
+│ email (UNIQUE)      │       │ description              │
+│ password            │◄──┐   │ start_date               │
+│ profile_picture     │   │   │ end_date                 │
+│ provider            │   │   │ min_budget               │
+│ provider_id         │   │   │ max_budget               │
+│ role                │   │   │ travelers                │
+│ email_verified      │   │   │ trip_type                │
+│ created_at          │   │   │ transport_mode           │
+│ updated_at          │   │   │ status (PLANNING/ONGOING │
+└─────────────────────┘   │   │         /COMPLETED)      │
+                          │   │ created_by (FK → users)  │
+                          │   │ created_at               │
+                          │   └─────────┬────────────────┘
+                          │             │
+                          │   ┌─────────▼────────────────┐
+                          │   │      trip_members        │
+                          │   ├──────────────────────────┤
+                          └───┤ trip_id (FK)             │
+                              │ user_id (FK)             │
+                              │ role (CREATOR/MEMBER)    │
+                              │ joined_at                │
+                              └──────────────────────────┘
+
+┌─────────────────────┐       ┌──────────────────────────┐
+│      expenses       │       │      expense_splits      │
+├─────────────────────┤       ├──────────────────────────┤
+│ id (PK)             │       │ id (PK)                  │
+│ trip_id (FK)        │◄──────┤ expense_id (FK)          │
+│ description         │       │ user_id (FK → users)     │
+│ amount              │       │ amount_owed              │
+│ category            │       │ is_settled               │
+│ paid_by (FK→users)  │       └──────────────────────────┘
+│ split_type          │
+│ created_at          │
+└─────────────────────┘
+
+┌─────────────────────┐       ┌──────────────────────────┐
+│      packages       │       │        bookings          │
+├─────────────────────┤       ├──────────────────────────┤
+│ id (PK)             │       │ id (PK)                  │
+│ title               │       │ user_id (FK)             │
+│ description         │◄──────┤ package_id (FK)          │
+│ destination         │       │ travelers                │
+│ duration_days       │       │ total_amount             │
+│ price_per_person    │       │ travel_date              │
+│ category (tag)      │       │ status (CONFIRMED/       │
+│ season              │       │         CANCELLED)       │
+│ transport_mode      │       │ booking_number           │
+│ highlights (JSON)   │       │ created_at               │
+│ images (JSON)       │       └──────────────────────────┘
+│ is_active           │
+│ created_by (FK)     │       ┌──────────────────────────┐
+│ created_at          │       │        payments          │
+└─────────────────────┘       ├──────────────────────────┤
+                              │ id (PK)                  │
+                              │ booking_id (FK)          │
+                              │ razorpay_order_id        │
+                              │ razorpay_payment_id      │
+                              │ razorpay_signature       │
+                              │ amount                   │
+                              │ status (PENDING/SUCCESS/ │
+                              │         FAILED)          │
+                              │ created_at               │
+                              └──────────────────────────┘
+```
+
+---
+
+## Component Design
+
+### Backend Layers
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      Controller Layer                        │
+│  AuthController  TripController  PackageController          │
+│  BookingController  ExpenseController  AdminController      │
+│  PaymentController  UserController                          │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ calls
+┌──────────────────────────▼──────────────────────────────────┐
+│                       Service Layer                          │
+│  AuthService  TripService  PackageService  BookingService   │
+│  ExpenseService  SettlementService  AdminService            │
+│  PaymentService (Razorpay)  UserService                     │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ uses
+┌──────────────────────────▼──────────────────────────────────┐
+│                     Repository Layer                         │
+│  UserRepository  TripRepository  TripMemberRepository       │
+│  PackageRepository  BookingRepository  ExpenseRepository    │
+│  ExpenseSplitRepository  PaymentRepository                  │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ JPA / Hibernate
+┌──────────────────────────▼──────────────────────────────────┐
+│                     MySQL Database                           │
+│              (Azure Flexible Server)                         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Frontend Pages & Components
+
+```
+App
+├── Public Routes
+│   ├── LandingPage          ← Hero, CTA buttons
+│   ├── LoginPage            ← Email + Google OAuth
+│   └── RegisterPage         ← Full registration form
+│
+└── Protected Routes (JWT required)
+    ├── DashboardPage        ← User stats, quick actions
+    ├── ExplorePage          ← Package grid, filters, search
+    │   └── PackageDetailPage
+    ├── MyTripsPage          ← User's trips list
+    │   ├── CreateTripModal
+    │   └── TripDetailPage
+    │       ├── TripMembersPanel
+    │       └── ExpensesPage
+    │           ├── ExpensesTab      ← Expense list
+    │           ├── BalancesTab      ← Per-member balance
+    │           └── SettleUpTab      ← Simplified transactions
+    ├── BookingsPage         ← All user bookings + cancel
+    ├── ProfileMenu
+    │   └── ChangePasswordPage
+    └── Admin Routes (ADMIN / SUPER_ADMIN only)
+        └── AdminPanel
+            ├── AdminDashboard       ← Stats + charts
+            ├── AddPackagePage
+            ├── AddPredefinedTripPage
+            ├── ManagePackagesPage
+            ├── BookingsManagePage
+            ├── UsersManagePage
+            └── AnalyticsPage
+```
+
+---
+
+## Authentication Flow
+
+### JWT Login Flow
+
+```
+Client                          Server                       DB
+  │                               │                          │
+  │──POST /api/auth/login──────►  │                          │
+  │  {email, password}            │──findByEmail()──────────►│
+  │                               │◄────────User─────────────│
+  │                               │──BCrypt.verify()         │
+  │                               │──generateJWT(userId,role)│
+  │◄──{accessToken, user}─────────│                          │
+  │                               │                          │
+  │  (stores JWT in localStorage) │                          │
+  │                               │                          │
+  │──GET /api/trips─────────────► │                          │
+  │  Authorization: Bearer <JWT>  │──validateJWT()           │
+  │                               │──extractUserId()         │
+  │                               │──authorize(role)         │
+  │◄──[trips]─────────────────────│                          │
+```
+
+### Google OAuth2 Flow
+
+```
+Client              Spring Boot            Google              DB
+  │                     │                    │                  │
+  │─Click Google────►   │                    │                  │
+  │◄─redirect to────────│                    │                  │
+  │  Google Auth URL    │                    │                  │
+  │──────────────────────────────────────────►                  │
+  │◄─────────────────────────────────────────                   │
+  │  code in callback   │                    │                  │
+  │──GET /oauth2/callback/google─────────────►                  │
+  │                     │◄──profile(email,   │                  │
+  │                     │    name, picture)──│                  │
+  │                     │──findOrCreate(email)────────────────► │
+  │                     │◄──────────────────────────────────────│
+  │                     │──generateJWT()     │                  │
+  │◄──redirect with JWT─│                   │                  │
+```
+
+---
+
+## Payment Flow
+
+```
+Client                  Backend                    Razorpay
+  │                        │                          │
+  │──POST /payments/────►  │                          │
+  │  create-order          │──razorpay.orders.create()►│
+  │  {packageId, travelers}│◄──{orderId, amount}───────│
+  │◄──{orderId, amount}────│                          │
+  │                        │                          │
+  │  [Razorpay Checkout    │                          │
+  │   Modal opens]         │                          │
+  │──User pays─────────────────────────────────────── ►│
+  │◄──{paymentId,          │                          │
+  │   orderId, signature}──────────────────────────────│
+  │                        │                          │
+  │──POST /payments/────►  │                          │
+  │  verify                │──verifySignature()        │
+  │  {paymentId,           │──createBooking()          │
+  │   orderId, signature}  │──savePayment(SUCCESS)    │
+  │◄──{bookingId, status}──│                          │
+  │                        │                          │
+  │  [Redirect to          │                          │
+  │   Bookings page]       │                          │
+```
+
+---
+
+## Expense Split Algorithm
+
+### Equal Split Logic
+
+```
+Input:  expense amount A, participants P[]
+Output: splits where each person owes A / |P|
+
+Example:
+  Amount: ₹15,000
+  Paid by: Yuvraj
+  Participants: [Yuvraj, Rahul, Priya]
+  
+  Per person = 15000 / 3 = ₹5,000
+  
+  Splits:
+    Yuvraj → owes ₹5,000 (but paid, so net = +₹10,000)
+    Rahul  → owes ₹5,000 to Yuvraj
+    Priya  → owes ₹5,000 to Yuvraj
+```
+
+### Settle Up — Simplified Transactions Algorithm
+
+```
+Goal: Minimize number of transactions to settle all debts
+
+Step 1: Calculate net balance for each member
+  netBalance[i] = totalPaid[i] - totalOwed[i]
+
+Step 2: Separate into creditors (net > 0) and debtors (net < 0)
+
+Step 3: Greedy matching
+  while debtors and creditors exist:
+    take max debtor D (owes most)
+    take max creditor C (gets back most)
+    
+    payment = min(|D.balance|, C.balance)
+    record: D pays C the amount 'payment'
+    
+    D.balance += payment
+    C.balance -= payment
+    
+    remove if balance = 0
+
+Example:
+  Members: A, B, C
+  Net: A = +₹500, B = -₹200, C = -₹300
+
+  Transaction 1: C pays A ₹300  → A=+200, C=0
+  Transaction 2: B pays A ₹200  → A=0,    B=0
+  
+  Result: 2 transactions instead of potentially more
+```
+
+---
+
+## Deployment Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         VERCEL                               │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  React Build (Static)   CDN Edge Network            │   │
+│  │  smart-trip-planner-pq2z.vercel.app                 │   │
+│  └─────────────────────────────────────────────────────┘   │
+└────────────────────────────┬────────────────────────────────┘
+                             │ HTTPS API calls
+┌────────────────────────────▼────────────────────────────────┐
+│                      MICROSOFT AZURE                         │
+│                                                              │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │              Azure App Service                       │   │
+│  │   ┌─────────────────────────────────────────────┐   │   │
+│  │   │   Docker Container                          │   │   │
+│  │   │   eclipse-temurin:17-jdk                    │   │   │
+│  │   │   SmartTripPlanner.jar                      │   │   │
+│  │   │   --spring.profiles.active=prod             │   │   │
+│  │   └─────────────────────────────────────────────┘   │   │
+│  └─────────────────────────┬───────────────────────────┘   │
+│                             │ VNet / Private Connection      │
+│  ┌─────────────────────────▼───────────────────────────┐   │
+│  │      Azure Database for MySQL Flexible Server        │   │
+│  │      MySQL 8.0 — smart_trip_planner DB              │   │
+│  └─────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+
+External Services:
+  ┌───────────────┐    ┌───────────────┐    ┌──────────────┐
+  │   Razorpay    │    │ Google OAuth2 │    │   Vercel     │
+  │   Payments    │    │    Server     │    │   (CI/CD)    │
+  └───────────────┘    └───────────────┘    └──────────────┘
+```
+
+---
+
+## Security Design
+
+### Security Layers
+
+```
+Request → CORS Filter → JWT Filter → Spring Security → Controller
+              │              │               │
+              │              │               └─ @PreAuthorize("hasRole('ADMIN')")
+              │              └─ Extract userId from token
+              └─ Allow only configured origins
+```
+
+### JWT Token Structure
+
+```json
+Header: { "alg": "HS512", "typ": "JWT" }
+Payload: {
+  "sub": "42",           // userId
+  "email": "u@mail.com",
+  "role": "USER",
+  "iat": 1717843200,
+  "exp": 1717929600      // 24 hours
+}
+Signature: HMACSHA512(base64(header) + "." + base64(payload), secret)
+```
+
+### Role Hierarchy
+
+```
+SUPER_ADMIN
+    └── ADMIN
+            └── USER
+```
+
+### Password Security
+- BCrypt hashing (strength 10)
+- Minimum 8 chars, uppercase + symbol required (frontend validation)
+- Change password requires current password verification
+
+---
+
+## API Design Principles
+
+1. **RESTful** — resource-based URLs, correct HTTP verbs
+2. **JWT Stateless** — no server-side sessions
+3. **DTO Pattern** — entities never exposed directly
+4. **Global Exception Handling** — `@ControllerAdvice` with consistent error responses
+5. **Validation** — `@Valid` on all request bodies
+6. **Role Guards** — `@PreAuthorize` on admin endpoints
+7. **Swagger Docs** — available at `/swagger-ui.html` in dev mode
+
+### Standard Error Response
+
+```json
+{
+  "timestamp": "2026-06-08T10:30:00",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Email already exists",
+  "path": "/api/auth/register"
+}
+```
