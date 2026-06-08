@@ -76,7 +76,7 @@ The most beautiful way to discover destinations, track group expenses, and settl
 | Layer | Technology |
 |---|---|
 | **Frontend** | React 18, JavaScript, CSS |
-| **Backend** | Spring Boot 3, Java 17 |
+| **Backend** | Spring Boot 4, Java 17 |
 | **Security** | Spring Security, JWT (jjwt 0.11.5), OAuth2 (Google) |
 | **Database** | MySQL (Azure Flexible Server) |
 | **ORM** | Spring Data JPA / Hibernate |
