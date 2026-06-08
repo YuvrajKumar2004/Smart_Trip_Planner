@@ -1,0 +1,60 @@
+# Contributing to TripPlanner
+
+Thank you for your interest in contributing! 🎉
+
+## Getting Started
+
+1. Fork the repo and clone locally
+2. Follow the setup steps in [README.md](./README.md)
+3. Create a new branch for your feature or bugfix
+
+## Branch Naming
+
+```
+feature/short-description     → new features
+fix/short-description          → bug fixes
+docs/short-description         → documentation only
+refactor/short-description     → code refactoring
+```
+
+## Commit Messages
+
+Use clear, descriptive commit messages:
+
+```
+feat: add expense category filter
+fix: correct settlement calculation for 3+ members
+docs: update API endpoint table in README
+refactor: extract PaymentService from BookingController
+```
+
+## Pull Request Process
+
+1. Make sure your code compiles and all tests pass (`./mvnw test`)
+2. Frontend builds without errors (`npm run build`)
+3. Add or update tests for changed logic (especially the settlement algorithm)
+4. Update docs if you're adding/changing API endpoints
+5. Open a PR targeting the `master` branch
+6. Fill in the PR template description
+
+## Code Style
+
+**Backend (Java)**
+- Follow standard Java naming conventions
+- Use Lombok to reduce boilerplate
+- Keep controller methods thin — logic belongs in the service layer
+- Add `@Valid` to all request body parameters
+
+**Frontend (React/JS)**
+- Functional components with hooks
+- Keep API calls in `/services/` files
+- Use context for auth state
+- CSS modules or component-scoped styles
+
+## Reporting Issues
+
+Open an issue with:
+- Clear title describing the problem
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots if relevant (especially for UI bugs)
