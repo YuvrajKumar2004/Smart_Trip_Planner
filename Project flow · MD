@@ -1,0 +1,330 @@
+# 🗺️ TripPlanner — Project Flow & User Journeys
+
+## Application Flow Overview
+
+```
+Landing Page
+    │
+    ├── Not Logged In
+    │       ├── Register (Email + Password) ──► Verify ──► Dashboard
+    │       └── Login    (Email / Google)   ──────────────► Dashboard
+    │
+    └── Logged In
+            └── Dashboard ──────────────────────────────────────────┐
+                                                                     │
+           ┌──────────────────────────────────────────────────────◄─┘
+           │
+           ├── Explore ────► Browse Packages ────► View Details ────► Book ────► Pay (Razorpay) ────► Bookings
+           │
+           ├── My Trips ───► View Trips ──────────► Create Trip ────► Invite Members
+           │                                                │
+           │                                               └──► Trip Detail ──► Add Expense ──► Balances / Settle Up
+           │
+           ├── Bookings ───► See All Bookings ──► Cancel Booking
+           │
+           ├── Expenses ───► All Expenses Across Trips
+           │
+           └── Profile ────► Change Password
+```
+
+---
+
+## 1. User Registration & Login
+
+### New User (Email/Password)
+```
+[Landing Page]
+  → Click "Get Started"
+  → Register Page
+      Fill: Full Name, Email, Password, Confirm Password
+      → POST /api/auth/register
+      → JWT returned
+      → Redirect to Dashboard
+```
+
+### Returning User (Email/Password)
+```
+[Landing Page]
+  → Click "Login"
+  → Login Page
+      Fill: Email, Password
+      → POST /api/auth/login
+      → JWT stored in localStorage
+      → Redirect to Dashboard
+```
+
+### Google OAuth2
+```
+[Login or Register Page]
+  → Click "Sign in with Google"
+  → Redirect to Google consent screen
+  → Google returns auth code
+  → Backend exchanges for profile (email, name, picture)
+  → Find or create user in DB
+  → Generate JWT
+  → Redirect to frontend with token
+  → Dashboard loaded
+```
+
+---
+
+## 2. Explore & Book a Trip Package
+
+```
+[Explore Page]
+  │
+  ├── Search bar: type destination name
+  │
+  ├── Filter by Category tab: ALL / ADVENTURE / RELAXATION / LUXURY / BUDGET / FAMILY / SPIRITUAL
+  │
+  ├── Advanced Filters:
+  │     MIN BUDGET (₹)   MAX BUDGET (₹)   MAX DURATION (days)   SEASON   TRANSPORT
+  │
+  └── Package Cards displayed:
+        ┌──────────────────────────────────────────────┐
+        │  [Category Tag]             [Xd Duration]    │
+        │  [Destination Photo]                         │
+        │  Title                                       │
+        │  Short description                           │
+        │  📍 Highlight 1   📍 Highlight 2   +n        │
+        │  FROM ₹XX,XXX per person          [View →]  │
+        └──────────────────────────────────────────────┘
+
+  → Click "View"
+  → Package Detail Page:
+      Full description, itinerary, highlights, inclusions
+      Number of travelers selector (cost updates dynamically)
+      → "Book Now" button
+      → Payment Modal (Razorpay Checkout)
+      → On success → /api/payments/verify
+      → Booking created → redirect to My Bookings
+```
+
+---
+
+## 3. My Bookings
+
+```
+[Bookings Page]
+  │
+  ├── Lists all bookings (confirmed, upcoming, past)
+  │     Each card: Package name, Status badge (CONFIRMED)
+  │                Travel date, Travelers count, Booking #, Amount
+  │
+  └── Cancel button (if eligible)
+        → PUT /api/bookings/{id}/cancel
+        → Status updates to CANCELLED
+```
+
+---
+
+## 4. Create & Manage a Custom Trip
+
+### Create Trip
+```
+[My Trips Page]
+  → Click "+ Create Trip"
+  → Modal:
+      Trip Title, Description
+      Start Date, End Date
+      Min Budget (₹), Max Budget (₹)
+      Travelers, Trip Type (dropdown), Transport Mode (dropdown)
+  → POST /api/trips
+  → Trip appears in list
+```
+
+### Invite Members
+```
+[Trip Detail Page]
+  → Members panel (right sidebar)
+  → "Add Member by Email" input
+  → Enter friend's email → click add button
+  → POST /api/trips/{id}/members
+  → Member added (shows name + email)
+  → Member can now see trip & expenses in their account
+```
+
+### Start Trip
+```
+[Trip Detail Page]
+  → "Start Trip" button
+  → Status: PLANNING → ONGOING
+```
+
+---
+
+## 5. Expense Splitting (The Core Feature)
+
+### Add Expense
+```
+[Trip Detail] → click "Expenses & Settlements"
+[Expenses Page] → click "+ Add Expense"
+  → Modal:
+      Description (e.g. "Dinner at mountain café")
+      Amount (₹)
+      Category: FOOD / TRANSPORT / ACCOMMODATION / ACTIVITIES / MEDICAL / SHOPPING / MISCELLANEOUS
+      Split Type: EQUAL
+      Participants: select from trip members
+  → POST /api/trips/{id}/expenses
+  → Expense appears in list for ALL trip members
+```
+
+### View Expense List
+```
+[Expenses Tab]
+  Each row: Category emoji, Description, "Paid by X", Split type, People count, Amount, Category badge
+  → Delete button (for expense creator)
+```
+
+### View Balances
+```
+[Balances Tab]
+  Per member card:
+    Name
+    "Gets back" (green) or "Owes" (red) indicator
+    Paid: ₹XX,XXX
+    Owes: ₹XX,XXX
+    Net:  +₹X,XXX  or  -₹X,XXX
+```
+
+### Settle Up
+```
+[Settle Up Tab]
+  Header: "Simplified Transactions"
+          "Minimum payments to settle all debts in this trip"
+
+  Each row: [Person A] → [Person B]  ₹Amount   [Mark Settled]
+
+  → Click "Mark Settled"
+  → PUT /api/trips/{id}/expenses/settle/{sid}
+  → Row marked as settled
+  → Pending Debts count decreases
+```
+
+---
+
+## 6. Admin Flow
+
+### Admin/Super Admin Sidebar
+```
+[Admin Panel]
+  ├── Dashboard
+  │     Live stats: Users, Revenue, Bookings, Active Packages
+  │     Platform Monthly Revenue chart (line)
+  │     Bookings by Travel Category chart (donut)
+  │
+  ├── Add Package
+  │     Form: Title, Description, Destinations, Duration, Price/person,
+  │           Category, Season, Transport, Highlights, Images
+  │     → POST /api/packages
+  │
+  ├── Add Predefined Trip
+  │     Pre-built itinerary with day-by-day plan
+  │
+  ├── Manage Packages
+  │     List all packages → Edit / Delete / Toggle active
+  │
+  ├── Bookings (count badge)
+  │     All platform bookings across users
+  │
+  ├── Users (count badge)
+  │     All registered users
+  │
+  └── Analytics
+        Detailed revenue, booking trends, popular destinations
+```
+
+---
+
+## 7. Profile & Password Change
+
+```
+[Any Page] → Click profile avatar (top right)
+  → Dropdown: Profile, Change Password, Logout
+
+[Change Password Page]
+  → Current Password
+  → New Password (min 8 chars, uppercase + symbol)
+  → Confirm New Password
+  → PUT /api/users/change-password
+  → Success toast → stay on page
+```
+
+---
+
+## Role Access Matrix
+
+| Page / Feature          | USER | ADMIN | SUPER_ADMIN |
+|-------------------------|:----:|:-----:|:-----------:|
+| Landing / Auth          | ✅   | ✅    | ✅          |
+| Explore Packages        | ✅   | ✅    | ✅          |
+| Book Package            | ✅   | ✅    | ✅          |
+| My Bookings             | ✅   | ✅    | ✅          |
+| My Trips                | ✅   | ✅    | ✅          |
+| Expense Splitting       | ✅   | ✅    | ✅          |
+| Change Password         | ✅   | ✅    | ✅          |
+| Add Package             | ❌   | ✅    | ✅          |
+| Add Predefined Trip     | ❌   | ✅    | ✅          |
+| Manage Packages         | ❌   | ✅    | ✅          |
+| Admin Dashboard         | ❌   | ✅    | ✅          |
+| View All Users          | ❌   | ✅    | ✅          |
+| View All Bookings       | ❌   | ✅    | ✅          |
+| Platform Analytics      | ❌   | ✅    | ✅          |
+| Manage Users            | ❌   | ❌    | ✅          |
+
+---
+
+## Data Flow: Payment to Booking
+
+```
+User selects package + travelers
+        │
+        ▼
+POST /api/payments/create-order
+  → Razorpay SDK: orders.create({amount, currency: "INR"})
+  → Returns: { orderId, amount, currency }
+        │
+        ▼
+Razorpay Checkout Modal opens in browser
+User enters card/UPI/netbanking details
+        │
+        ▼
+Payment processed on Razorpay servers
+Returns: { razorpay_payment_id, razorpay_order_id, razorpay_signature }
+        │
+        ▼
+POST /api/payments/verify
+  → HMAC-SHA256 signature verification
+  → If valid: create Booking record (status=CONFIRMED)
+              create Payment record (status=SUCCESS)
+  → Returns: { bookingId, bookingNumber, status }
+        │
+        ▼
+Frontend redirects to /bookings
+User sees new confirmed booking
+```
+
+---
+
+## Data Flow: Expense Split & Settlement
+
+```
+Trip has 3 members: A, B, C
+
+Expenses added:
+  Expense 1: ₹3,000 paid by A, EQUAL split (A, B, C) → each owes ₹1,000
+  Expense 2: ₹6,000 paid by B, EQUAL split (A, B, C) → each owes ₹2,000
+  Expense 3: ₹1,500 paid by C, EQUAL split (A, B)    → each owes ₹750
+
+Calculate net balances:
+  A: paid ₹3,000  owes ₹1,000+₹2,000+₹750 = ₹3,750   net = -₹750
+  B: paid ₹6,000  owes ₹1,000+₹2,000       = ₹3,000   net = +₹3,000
+  C: paid ₹1,500  owes ₹1,000+₹2,000       = ₹3,000   net = -₹1,500
+
+Settle Up (simplified):
+  C owes most (-₹1,500) → pays B ₹1,500   → B = +₹1,500, C = 0
+  A owes (-₹750)        → pays B ₹750     → B = +₹750,   A = 0
+  B gets ₹0 remaining   → done ✓
+
+Result: 2 transactions, all settled
+```
