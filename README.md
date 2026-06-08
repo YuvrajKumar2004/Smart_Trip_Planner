@@ -339,13 +339,6 @@ Smart_Trip_Planner/
 **Yuvraj Kumar**  
 [![GitHub](https://img.shields.io/badge/GitHub-YuvrajKumar2004-181717?style=flat-square&logo=github)](https://github.com/YuvrajKumar2004)
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
 
 <div align="center">
   <strong>Built with ❤️ using Spring Boot + React</strong><br/>
