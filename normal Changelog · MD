@@ -1,0 +1,52 @@
+# Changelog
+
+All notable changes to TripPlanner are documented here.
+
+## [1.0.0] — 2026-06-08
+
+### 🚀 Initial Release
+
+#### Authentication
+- Email/password registration and login with JWT
+- Google OAuth2 single sign-on
+- Role-based access control: USER, ADMIN, SUPER_ADMIN
+- Change password from profile
+
+#### Explore & Packages
+- Browse predefined travel packages (Varanasi, Goa, Leh-Ladakh, Sikkim, etc.)
+- Filter by category (Adventure, Relaxation, Luxury, Budget, Family, Spiritual)
+- Filter by budget range, duration, season, transport mode
+- Category and duration badges on package cards
+- Dynamic pricing based on number of travelers
+
+#### Payments & Bookings
+- Razorpay payment gateway integration
+- HMAC-SHA256 payment signature verification
+- Booking history with status (CONFIRMED / CANCELLED)
+- Cancel booking feature
+
+#### My Trips (Custom Planning)
+- Create personal trips with full metadata
+- Invite members by email
+- Trip lifecycle management (PLANNING → ONGOING → COMPLETED)
+
+#### Expense Splitting
+- Add expenses with description, amount, and category
+- Equal split across selected participants
+- Per-member balance view (Balances tab)
+- Simplified transaction algorithm for debt settlement (Settle Up tab)
+- Mark individual settlements as settled
+
+#### Admin Panel
+- Real-time dashboard: users, revenue, bookings, active packages
+- Platform Monthly Revenue chart
+- Bookings by Travel Category donut chart
+- Add/Manage packages and predefined trips
+- View all users and bookings
+
+#### Infrastructure
+- Spring Boot 3 backend on Azure App Service (Docker)
+- React frontend on Vercel CDN
+- Azure Database for MySQL Flexible Server
+- Multi-stage Docker build
+- Swagger UI API documentation
