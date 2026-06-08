@@ -10,9 +10,16 @@ export default function OAuth2RedirectHandler() {
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
+        console.log("FULL URL:", window.location.href);
+
         const accessToken = params.get('accessToken');
         const refreshToken = params.get('refreshToken');
         const userId = params.get('userId');
+
+        console.log("accessToken:", accessToken);
+        console.log("refreshToken:", refreshToken);
+        console.log("userId:", userId);
+        console.log("All params:", Object.fromEntries(params.entries()));
         const name = params.get('name');
         const email = params.get('email');
         const role = params.get('role');

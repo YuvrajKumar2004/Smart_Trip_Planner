@@ -31,8 +31,11 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         String accessToken  = jwtTokenProvider.generateAccessToken(user);
         String refreshToken = refreshTokenService.createRefreshToken(user).getToken();
-
-        String redirectUrl = "http://localhost:3000/oauth2/redirect?accessToken=" + accessToken 
+        String frontendUrl = System.getenv().getOrDefault(
+                "FRONTEND_URL",
+                "http://localhost:3000"
+        );
+        String redirectUrl = frontendUrl + "/oauth2/redirect?accessToken=" + accessToken
                 + "&refreshToken=" + refreshToken 
                 + "&userId=" + user.getId() 
                 + "&name=" + java.net.URLEncoder.encode(user.getName(), java.nio.charset.StandardCharsets.UTF_8)
