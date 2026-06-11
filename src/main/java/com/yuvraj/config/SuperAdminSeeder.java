@@ -19,14 +19,14 @@ public class SuperAdminSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        String email = "superadmin@gmail.com";
+        String email = "super@gmail.com";
 
         if (userRepository.findByEmail(email).isEmpty()) {
 
             User superAdmin = User.builder()
                     .name("Super Admin")
                     .email(email)
-                    .password(passwordEncoder.encode("Super@123"))
+                    .password(passwordEncoder.encode("Super@1"))
                     .role(Role.SUPER_ADMIN)
                     .provider(AuthProvider.LOCAL)
                     .build();
